@@ -107,5 +107,19 @@ public class UserRegistrationTest {
 			 boolean result = userRegistration.password3("ka@mh");
 			 Assert.assertEquals(false, result);
 		 }
+		 
+		 /*
+		  * Rule-4 ---> Has exactly 1 special character
+		  */
+		 @Test
+		 public void givenPasswordRule4_WhenProper_ShouldReturnTrue(){
+			 boolean result = userRegistration.password4("Kapilmahajan@1999");
+			 Assert.assertEquals(true, result);
+		 }
+		 @Test
+	     public void givenPasswordRule4_WhenNotProper_ShouldReturnFalse(){
+			 boolean result = userRegistration.password4("Kapil99");
+			 Assert.assertEquals(false, result);
+		 }
 
 }
