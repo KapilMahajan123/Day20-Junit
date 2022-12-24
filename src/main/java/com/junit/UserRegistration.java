@@ -34,4 +34,12 @@ public class UserRegistration {
 		Matcher matcher = pattern.matcher(email);
 		return matcher.matches();
 	}
+    @Test
+    public boolean mobileNumber(String number) {
+		String regex = "^[0-9]{1,3}[ ][6-9][0-9]{9}$";
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(number);
+		return matcher.matches();
+	}
 }
+
