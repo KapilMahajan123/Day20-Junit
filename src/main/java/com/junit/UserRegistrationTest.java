@@ -35,5 +35,20 @@ public class UserRegistrationTest {
 	    	boolean result = userRegistration.lastName("mahajan");
 	    	Assert.assertEquals(false, result);
 	    }
+	    
+	    /*
+	     * User need to valid email id.
+	     */
+	    @Test
+		public void givenEmail_WhenProper_ShouldReturnTrue() {
+			boolean result = userRegistration.email("abc.xyz@bl.co.in");
+			Assert.assertEquals(true, result);
+		}
+
+		@Test
+		public void givenEmail_WhenNotProper_ShouldReturnFalse() {
+			boolean result = userRegistration.email("abc&.com");
+			Assert.assertEquals(false, result);
+		}
 
 }
