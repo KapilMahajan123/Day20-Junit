@@ -78,6 +78,20 @@ public class UserRegistrationTest {
 	     public void givenPassword_WhenNotProper_ShouldReturnFalse(){
 	    	 boolean result = userRegistration.password("qwertyyuuiop");
 	    	 Assert.assertEquals(false, result);
-	 }
+	     }
+	     
+	     /*
+	      * Rule-2 ---> Should have at least 1 upper case
+	      */
+	     @Test
+		 public void givenPasswordRule2_WhenProper_ShouldReturnTrue(){
+			 boolean result = userRegistration.password2("Qwertyu19");
+			 Assert.assertEquals(true, result);
+		 }
+		 @Test
+	     public void givenPasswordRule2_WhenNotProper_ShouldReturnFalse(){
+			 boolean result = userRegistration.password2("qwerrty");
+			 Assert.assertEquals(false, result);
+		 }
 
 }
