@@ -1,44 +1,98 @@
 package com.day20;
 
-import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-
 import java.util.Arrays;
-import java.util.Collection;
+import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
 import static org.junit.Assert.assertEquals;
-@RunWith(Parameterized.class)
-public class UserRegistrationTest
-{
-    private String emailTest;
-    private boolean expectedResult;
-    private UserRegistration validateEmail;
 
-    public UserRegistrationTest(String email, boolean expectedResult) {
-        this.emailTest = email;
-        this.expectedResult = expectedResult;
-    }
+public class UserRegistrationTest {
+	UserRegistration userRegistration = new UserRegistration();
+	Function<List<String>, List<Boolean>> firstNameTestCases = cases -> cases.stream().map(x -> {
+		try {
+			return userRegistration.firstNameValidate.userEntries(x);
+		} catch (InvalidUserInputException e) {
+			// TODO Auto-generated catch block
 
-    @Before
-    public void initialize() {
-        validateEmail = new UserRegistration();
-    }
+		}
+		return false;
+	}).collect(Collectors.toList());
 
-    @Parameterized.Parameters
-    public static Collection data() {
-        return Arrays.asList(new Object[][] { { "abc@yahoo.com", true }, { "abc-100@yahoo.com", true },
-                { "abc.100@yahoo.com", true }, { "abc111@abc.com", true }, { "abc-100@abc.net", true },
-                { "abc.100@abc.com.au", true }, { "abc@1.com", true }, { "abc@gmail.com.com", true },
-                { "abc+100@gmail.com", true }, { "abc", false }, { "abc@.com.my", false }, { "abc123@gmail.a", false },
-                { "abc123@.com", false }, { "abc123@.com.com", false }, { ".abc@abc.com", false },
-                { "abc()*@gmail.com", false }, { "abc@%*.com", false }, { "abc..2002@gmail.com", false },
-                { "abc.@gmail.com", false }, { "abc@abc@gmail.com", false }, { "abc@gmail.com.1a", false },
-                { "abc@gmail.com.aa.au", false } });
-    }
+	Function<List<String>, List<Boolean>> lastNameTestCases = cases -> cases.stream().map(x -> {
+		try {
+			return userRegistration.lastNameValidate.userEntries(x);
+		} catch (InvalidUserInputException e) {
+			// TODO Auto-generated catch block
 
-    @Test
-    public void givenEmailAsVar_ShouldReturnTrueorFalse() {
-        assertEquals(expectedResult, validateEmail.validateEmail(emailTest));
-    }
+		}
+		return false;
+	}).collect(Collectors.toList());
+
+	Function<List<String>, List<Boolean>> emailTestCases = cases -> cases.stream().map(x -> {
+		try {
+			return userRegistration.emailValidate.userEntries(x);
+		} catch (InvalidUserInputException e) {
+			// TODO Auto-generated catch block
+
+		}
+		return false;
+	}).collect(Collectors.toList());
+
+	Function<List<String>, List<Boolean>> phoneTestCases = cases -> cases.stream().map(x -> {
+		try {
+			return userRegistration.phoneNumberValidate.userEntries(x);
+		} catch (InvalidUserInputException e) {
+			// TODO Auto-generated catch block
+
+		}
+		return false;
+	}).collect(Collectors.toList());
+
+	Function<List<String>, List<Boolean>> passwordTestCases = cases -> cases.stream().map(x -> {
+		try {
+			return userRegistration.passwordValidate.userEntries(x);
+		} catch (InvalidUserInputException e) {
+			// TODO Auto-generated catch block
+
+		}
+		return false;
+	}).collect(Collectors.toList());
+
+	@Test
+	public void test_firstName_Cases() {
+		List<Boolean> result = firstNameTestCases.apply(Arrays.asList("Nadeem"));
+		List<Boolean> expected = Arrays.asList(true);
+		assertEquals(expected, result);
+	}
+
+	@Test
+	public void test_lastName_Cases() {
+		List<Boolean> result = lastNameTestCases.apply(Arrays.asList("Akhtar"));
+		List<Boolean> expected = Arrays.asList(true);
+		assertEquals(expected, result);
+	}
+
+	@Test
+	public void test_email_Cases() {
+		List<Boolean> result = emailTestCases.apply(Arrays.asList("abc@1.com"));
+		List<Boolean> expected = Arrays.asList(true);
+		assertEquals(expected, result);
+	}
+
+	@Test
+	public void test_phoneNumber_Cases() {
+		List<Boolean> result = phoneTestCases.apply(Arrays.asList("91 8826923224"));
+		List<Boolean> expected = Arrays.asList(true);
+		assertEquals(expected, result);
+	}
+
+	@Test
+	public void test_password_Cases() {
+		List<Boolean> result = passwordTestCases.apply(Arrays.asList("Nadeem@1995"));
+		List<Boolean> expected = Arrays.asList(true);
+		assertEquals(expected, result);
+	}
+
 }
