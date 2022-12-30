@@ -9,7 +9,12 @@ import java.util.Arrays;
 import java.util.Collection;
 import static org.junit.Assert.assertEquals;
 
-@RunWith(Parameterized.class)
+/**
+  *@author Kapil
+  *
+  *@RunWith(Parameterized.class)
+  *
+  **/
 public class ValidEmailTest
 {
     private String emailTest;
