@@ -8,8 +8,18 @@ import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+  *
+  *@author Kapil
+  *
+  **/
 public class UserRegistrationTest {
-	UserRegistration userRegistration = new UserRegistration();
+	/**
+	  * code to use lambda function
+	  * To validate user entry
+	  * FirstName, LastName, Email, Mobile and Password
+	  **/
+	UserRegistration userRegistration = new UserRegistration(); //creat an object
 	Function<List<String>, List<Boolean>> firstNameTestCases = cases -> cases.stream().map(x -> {
 		try {
 			return userRegistration.firstNameValidate.userEntries(x);
@@ -62,14 +72,14 @@ public class UserRegistrationTest {
 
 	@Test
 	public void test_firstName_Cases() {
-		List<Boolean> result = firstNameTestCases.apply(Arrays.asList("Nadeem"));
+		List<Boolean> result = firstNameTestCases.apply(Arrays.asList("Kapil"));
 		List<Boolean> expected = Arrays.asList(true);
 		assertEquals(expected, result);
 	}
 
 	@Test
 	public void test_lastName_Cases() {
-		List<Boolean> result = lastNameTestCases.apply(Arrays.asList("Akhtar"));
+		List<Boolean> result = lastNameTestCases.apply(Arrays.asList("Mahajan"));
 		List<Boolean> expected = Arrays.asList(true);
 		assertEquals(expected, result);
 	}
@@ -83,14 +93,14 @@ public class UserRegistrationTest {
 
 	@Test
 	public void test_phoneNumber_Cases() {
-		List<Boolean> result = phoneTestCases.apply(Arrays.asList("91 8826923224"));
+		List<Boolean> result = phoneTestCases.apply(Arrays.asList("91 7798655562"));
 		List<Boolean> expected = Arrays.asList(true);
 		assertEquals(expected, result);
 	}
 
 	@Test
 	public void test_password_Cases() {
-		List<Boolean> result = passwordTestCases.apply(Arrays.asList("Nadeem@1995"));
+		List<Boolean> result = passwordTestCases.apply(Arrays.asList("Kapilm@1995"));
 		List<Boolean> expected = Arrays.asList(true);
 		assertEquals(expected, result);
 	}
